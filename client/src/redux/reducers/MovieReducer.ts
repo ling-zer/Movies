@@ -5,6 +5,7 @@ import { IMovie } from "../../services/MovieService";
 import { DeleteAction, MoiveActions, SaveMoviesAction, SetConditionAction, SetLoadingAction } from "../actions/MovieAction";
 import { MovieReduer } from "./ReducerType";
 
+// 仓库中的状态不能为可选值，因此利用类型演算，将ISearchCondtion中的可选变为必选
 export type IMovieCondition = Required<ISearchCondtion>
 
 /**
@@ -81,19 +82,15 @@ const deleteMovie: MovieReduer<DeleteAction> = function(state, action) {
 export default function(state: IMovieState = defaultState, action: MoiveActions) {
     switch(action.type) {
         case "movie_save":
-            savaMovie(state, action);
-            break;
+            return savaMovie(state, action);
         case "movie_setLoading":
-            setLoading(state, action);
-            break;
+            return setLoading(state, action);
         case "movie_set_condition": 
-            setCondition(state, action);
-            break;
+            return setCondition(state, action);
         case "movie_delete":
-            deleteMovie(state, action);
-            break;
+            return deleteMovie(state, action);
         default:
-            break;
+            return state;
     }
     
 }
