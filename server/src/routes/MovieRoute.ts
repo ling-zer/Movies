@@ -47,7 +47,7 @@ router.put("/:id", async (req, res) => {
         if(result.length > 0) {
             ResponseHelper.sendError(result, res);
         } else {
-            ResponseHelper.sendData("修改成功", res);
+            ResponseHelper.sendData(true, res);
         }
     }catch {
         ResponseHelper.sendError("id错误", res);
