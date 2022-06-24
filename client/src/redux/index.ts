@@ -1,10 +1,25 @@
-import {configureStore} from "@reduxjs/toolkit"
-// import { rootReducer } from "./reducers/RootReducer"
+import {configureStore, ThunkAction, Action} from "@reduxjs/toolkit"
 import logger from "redux-logger"
-import movie from "./features/MovieSlice"
-export const store = configureStore({
-    reducer: {
-        movie
-    },
-    middleware: [logger]
+import { rootReducer } from "./reducer/rootReducer"
+
+const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware()
+      .prepend(
+      )
+      // prepend and concat calls can be chained
+      .concat(logger)
 })
+
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+
+export type AppThunk = ThunkAction<
+  Promise<void> | void,
+  RootState,
+  unknown,
+  Action<string>
+>;
+
+export default store;
