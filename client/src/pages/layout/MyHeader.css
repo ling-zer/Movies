@@ -1,0 +1,16 @@
+.header-container {
+    height: 100%;
+    color: #ccc;
+    position: relative;
+}
+
+.header-container .nav {
+    color: inherit;
+    font-size: large;
+}
+
+.header-container .login {
+    position: absolute;
+    right: 3em;
+    top: 0;
+}

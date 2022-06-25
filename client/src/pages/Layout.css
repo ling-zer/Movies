@@ -1,0 +1,19 @@
+.container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.container .content-container {
+    margin: 1em;
+    padding: 1em;
+    background-color: #fff;
+    overflow: auto;
+}
+
+.container .footer {
+    background-color: #001529;
+    color: #ccc;
+    text-align: center;
+}
