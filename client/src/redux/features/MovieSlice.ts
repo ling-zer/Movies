@@ -1,9 +1,9 @@
 // 描述电影列表的状态类型
 
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ISearchCondtion } from "../../services/CommonTypes";
+import { ISearchCondtion, SwitchType } from "../../services/CommonTypes";
 import { IMovie } from "../../services/MovieService";
-import { DeletePayload, SaveMoviePayload, SetConditionPayload, SetLoadingPayload } from "../commonTypes";
+import { SaveMoviePayload } from "../commonTypes";
 import { MovieService } from "../../services/MovieService";
 
 // 仓库中的状态不能为可选值，因此利用类型演算，将ISearchCondtion中的可选变为必选
@@ -49,6 +49,10 @@ const initialState = {
     totalPage: 0
 } as IMovieState
 
+type ChangeswitchType = {
+    type: SwitchType, newVal: boolean, id: string
+}
+
 /**
  * 根据条件从服务器获取电影数据
  */
@@ -78,18 +82,21 @@ export const fetchMovies = createAsyncThunk<
 /**
  * 根据id从服务器获取电影数据
  */
- export const fetchMovieById = createAsyncThunk(
-    "movie/fetchMovieById",
-    async (id: string, thunkAPI) => {
-        // 1. 设置加载状态
-        thunkAPI.dispatch(setLoading(true));
+//  export const fetchMovieById = createAsyncThunk(
+//     "movie/fetchMovieById",
+//     async (id: string, thunkAPI) => {
+//         // 1. 设置加载状态
+//         thunkAPI.dispatch(setLoading(true));
 
-        // 2. 获取电影
-        const response = await MovieService.getMovieById(id);
-        return response
-    }
-)
+//         // 2. 获取电影
+//         const response = await MovieService.getMovieById(id);
+//         return response
+//     }
+// )
 
+/**
+ * 根据id删除电影
+ */
 export const deleteMovieById = createAsyncThunk(
     "movie/deleteMovie",
     async (id: string, thunkAPI) => {
@@ -97,6 +104,21 @@ export const deleteMovieById = createAsyncThunk(
         await MovieService.delete(id);
         thunkAPI.dispatch(deleteMovie(id)); // 删除本地仓库中的数据
         thunkAPI.dispatch(setLoading(false));
+    }
+)
+/**
+ * 改变电影中的isHot，isComing，isClassic的某个数据
+ */
+export const changeMovieSwitch = createAsyncThunk<
+    void,
+    ChangeswitchType
+>(
+    "movie/changeSwitch",
+    async(info, thunkAPI) => {
+        thunkAPI.dispatch(changeSwitch(info));
+        await MovieService.edit(info.id, {
+            [info.type]: info.newVal
+        });
     }
 )
 
@@ -110,20 +132,28 @@ const movieSlice = createSlice({
             state.total = total;
             state.totalPage = Math.ceil(total / state.condition.limit)
         },
-        setCondition: function (state, action: PayloadAction<SetConditionPayload>) {
+        setCondition: function (state, action: PayloadAction<ISearchCondtion>) {
             state.condition = { ...state.condition, ...action.payload };
-            state.totalPage = Math.ceil(state.total / state.condition.limit)
+            state.totalPage = Math.ceil(state.total / state.condition.limit);
         },
-        setLoading: function (state, action: PayloadAction<SetLoadingPayload>) {
+        setLoading: function (state, action: PayloadAction<boolean>) {
             state.isLoading = action.payload;
         },
-        deleteMovie: function (state, action: PayloadAction<DeletePayload>) {
+        deleteMovie: function (state, action: PayloadAction<string>) {
             const len = state.data.length;
             state.data = state.data.filter(m => m._id !== action.payload);
             if(len !== state.data.length) {
                 state.total -= 1;
             }
             state.totalPage = Math.ceil(state.total / state.condition.limit)
+        },
+        changeSwitch: function(state, action: PayloadAction<ChangeswitchType>) {
+            // 根据id找到电影
+            const movie = state.data.find(d => d._id === action.payload.id)
+            // 如果找到对应的电影，就进行修改
+            if(movie) {
+                movie[action.payload.type] = action.payload.newVal
+            }
         }
     },
     // extraReducers: (builder) => {
@@ -142,4 +172,4 @@ const movieSlice = createSlice({
 export default movieSlice.reducer;
 
 // 导出actions
-export const { saveMovie, setCondition, setLoading, deleteMovie } = movieSlice.actions
+export const { saveMovie, setCondition, setLoading, deleteMovie, changeSwitch } = movieSlice.actions
