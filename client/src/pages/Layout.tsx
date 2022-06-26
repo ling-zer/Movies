@@ -8,7 +8,6 @@ import "./Layout.css"
 const { Header, Footer, Sider, Content } = Layout;
 
 const _Layout: React.FC = function () {
-
     return (
         <div className="container">
             <Layout>
@@ -23,7 +22,7 @@ const _Layout: React.FC = function () {
                         <Outlet />
                     </Content>
                 </Layout>
-                <Footer className="footer">Footer</Footer>
+                <Footer className="footer">ling-zer@github.com</Footer>
             </Layout>
 
         </div>
