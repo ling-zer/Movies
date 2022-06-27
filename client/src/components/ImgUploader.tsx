@@ -6,21 +6,21 @@ import { IResponseData, IResponseError } from "../services/CommonTypes";
 import { UploadFile } from "antd/lib/upload/interface";
 
 interface IImgUploaderProps {
-    imgUrl: string,
+    value?: string,
     /**
      * 手动上传
      */
-    onChange: (img: string) => void;
+    onChange?: (img: string) => void;
 }
 
 export const ImgUploader: React.FC<IImgUploaderProps> = function (props) {
     const [previewVisible, setPreviewVisible] = useState(false);
     // 上传图片后，根据filelist的url进行显示
-    const fileList: UploadFile<any>[] = props.imgUrl ? [
+    const fileList: UploadFile<any>[] = props.value ? [
         {
-            uid: props.imgUrl,
-            name: props.imgUrl,
-            url: props.imgUrl
+            uid: props.value,
+            name: props.value,
+            url: props.value
         }
     ] : []
     return (
@@ -35,13 +35,13 @@ export const ImgUploader: React.FC<IImgUploaderProps> = function (props) {
                     handleRequest(options, props)
                 }}
                 onRemove={() => {
-                    props.onChange("")
+                    props.onChange && props.onChange("")
                 }}
                 onPreview={() => {
                     setPreviewVisible(true);
                 }}
             >
-                {props.imgUrl ? null :
+                {props.value ? null :
                     (<div>
                         <PlusOutlined />
                         <div style={{ marginTop: 8 }}>Upload</div>
@@ -53,7 +53,7 @@ export const ImgUploader: React.FC<IImgUploaderProps> = function (props) {
                     setPreviewVisible(false);
                 }}
             >
-                <img src={props.imgUrl} alt="" style={{ width: '100%' }} />
+                <img src={props.value} alt="" style={{ width: '100%' }} />
             </Modal>
         </div>
 
@@ -72,6 +72,6 @@ async function handleRequest(p: UploadRequestOption, props: IImgUploaderProps) {
     if (resp.err) {
         message.error(`上传失败！${resp.err}`)
     } else {
-        props.onChange(resp.data!);
+        props.onChange && props.onChange(resp.data!);
     }
 }
