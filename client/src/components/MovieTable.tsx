@@ -153,7 +153,7 @@ class MovieTable extends React.Component<IMovieTableEvent & IMovieState & INavig
                     return (
                         <div>
                             <Button type="primary" size="small" onClick={() => {
-                                this.props.navigate(`/movie/edit/:${id}`)
+                                this.props.navigate(`/movie/edit/${id}`)
                             }}>编辑</Button>
                             <Popconfirm
                                 title="确认删除该条数据吗?"
