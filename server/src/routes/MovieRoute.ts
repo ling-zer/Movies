@@ -4,6 +4,16 @@ import { ResponseHelper } from "./ResponseHelper";
 
 const router = Express.Router();
 
+router.get("/hotMovie", async (req, res) => {
+    console.log("hot")
+    try {
+        const result = await MovieService.findHot();
+        ResponseHelper.sendPageData(result, res);
+    }catch {
+        ResponseHelper.sendData(null, res);
+    }
+})
+
 // localhost:3000/api/movie/100001xxx params
 // localhost:3000/api/movie?id=100001XXX query
 router.get("/:id", async (req, res) => {

@@ -80,4 +80,17 @@ export class MovieService {
         }).countDocuments();
         return {data: movies, count, errors};
     }
+
+    /**
+     * 查询当前热映的电影数据
+     */
+    public static async findHot(): Promise<ISearchResult<IMovie>> {
+        const movies = await MovieModel.find({
+            isHot: true
+        })
+        const count = await MovieModel.find({
+            isHot: {$eq: true}
+        }).countDocuments();
+        return {data: movies, count, errors:[]};
+    }
 }
