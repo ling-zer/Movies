@@ -160,6 +160,7 @@ class MovieTable extends React.Component<IMovieTableEvent & IMovieState & INavig
                                 onConfirm={async () => {
                                     await this.props.onDelete(id)
                                     message.success("删除成功");
+                                    this.props.onSearch()
                                 }}
                                 okText="确定"
                                 cancelText="取消"
