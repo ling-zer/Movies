@@ -48,7 +48,7 @@ class MovieForm extends React.Component<IFormProp> {
         } else {
             message.success("处理成功");
             // 跳转页面
-            this.props.navigate && this.props.navigate('/movie', {replace: true})
+            this.props.navigate && this.props.navigate(-1)
         }
     }
 
@@ -144,7 +144,7 @@ class MovieForm extends React.Component<IFormProp> {
                     </Button>
                     <Button htmlType="button" 
                         onClick={() => {
-                            this.props.navigate && this.props.navigate('/movie', {replace: true})
+                            this.props.navigate && this.props.navigate(-1)
                         }}
                         style={{
                             marginLeft: 50
