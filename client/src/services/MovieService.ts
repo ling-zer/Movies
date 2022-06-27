@@ -42,4 +42,8 @@ export class MovieService {
         return data;
     }
     
+    public static async getHotMovies(): Promise<IResponsePageData<IMovie>> {
+        const {data} = await axios.get("/api/movie/hotMovie");
+        return data;
+    }
 }

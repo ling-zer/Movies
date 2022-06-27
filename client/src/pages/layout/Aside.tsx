@@ -10,8 +10,7 @@ const Aside: React.FC = function () {
   const items: MenuItem[] = [
     { label: '首页', key: '/' },
     { label: '电影列表', key: '/movie' }, // 菜单项务必填写 key
-    { label: '添加电影', key: '/movie/add' },
-    { label: '编辑电影', key: '/movie/edit/111' },
+    { label: '添加电影', key: '/movie/add' }
   ];
   const navigate = useNavigate();
   const handleClick = ({key}: MenuInfo) => {
