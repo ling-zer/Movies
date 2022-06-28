@@ -10,10 +10,10 @@ const MyHeader: React.FC = function () {
                     电影管理系统
                 </NavLink>
             </div>
-            <div className="login">
+            {/* <div className="login">
                 <span>登录</span>
 
-            </div>
+            </div> */}
        </div> 
     )
 }

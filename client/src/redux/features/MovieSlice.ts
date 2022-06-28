@@ -60,7 +60,7 @@ export const fetchMovies = createAsyncThunk<
     void,
     ISearchCondtion,
     {
-        state: {movie: IMovieState} // 这里必须设置为整个仓库的状态，设置为IMovieState时，外面dispatch会报错
+        state: {movie: IMovieState} // 这里必须设置为仓库的状态的类型{xx:xx}，设置为IMovieState时，外面dispatch会报错
     }
 >(
     "movie/fetchMovies",
