@@ -6,7 +6,7 @@
 
 服务器端：ts + express + mangodb + class-validator + class-transformer
 
-客户端：react全家桶(react-route、redux、antd)
+客户端：react全家桶(react-router、redux toolkit、antd)
 
 开发顺序：
 
