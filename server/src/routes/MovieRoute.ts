@@ -5,7 +5,6 @@ import { ResponseHelper } from "./ResponseHelper";
 const router = Express.Router();
 
 router.get("/hotMovie", async (req, res) => {
-    console.log("hot")
     try {
         const result = await MovieService.findHot();
         ResponseHelper.sendPageData(result, res);
