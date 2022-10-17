@@ -11,18 +11,20 @@ const EditMovie = React.lazy(() => import('./pages/movie/EditMovie'))
 const App: React.FC = () => {
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Layout />}>
+
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+
             <Route index element={<Home />}></Route>
             <Route path='/movie' element={<MovieList />}></Route>
             <Route path='/movie/add' element={<AddMovie />}></Route>
             <Route path='/movie/edit/:id' element={<EditMovie />}></Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </Suspense>
+
+        </Route>
+      </Routes>
+    </BrowserRouter>
+
   );
 }
 

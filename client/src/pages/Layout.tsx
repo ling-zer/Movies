@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Suspense} from "react";
 import { Outlet } from "react-router-dom";
 import { Layout } from 'antd';
 import Aside from "./layout/Aside";
@@ -19,7 +19,9 @@ const _Layout: React.FC = function () {
                         <Aside />
                     </Sider>
                     <Content className="content-container">
+                    <Suspense fallback={<div>Loading...</div>}>
                         <Outlet />
+                        </ Suspense>
                     </Content>
                 </Layout>
                 <Footer className="footer">ling-zer@github.com</Footer>
