@@ -1,5 +1,4 @@
 import {configureStore, ThunkAction, Action} from "@reduxjs/toolkit"
-import logger from "redux-logger"
 import { rootReducer } from "./reducer/rootReducer"
 
 const store = configureStore({

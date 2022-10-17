@@ -61,16 +61,17 @@ class MovieForm extends React.Component<IFormProp> {
                 autoComplete="off"
                 onFinish={this.finished.bind(this)}
                 ref={this.props.ref1}
+                
             >
                 <Form.Item
                     label="电影名称"
                     name="name"
                     rules={[{ required: true, message: '电影名称不能为空!' }]}
                 >
-                    <Input />
+                    <Input aria-placeholder="movie name"/>
                 </Form.Item>
 
-                <Form.Item label="电影类型" name="types" wrapperCol={{ offset: 0, span: 16 }} rules={[{required: true, message: "电影类型不能为空"}]}>
+                <Form.Item aria-label="move type" label="电影类型" name="types" wrapperCol={{ offset: 0, span: 16 }} rules={[{required: true, message: "电影类型不能为空"}]}>
                     <Checkbox.Group 
                         options={allTypes}
                     />
@@ -81,6 +82,7 @@ class MovieForm extends React.Component<IFormProp> {
                     name="area"
                     wrapperCol={{ offset: 0, span: 16 }}
                     rules={[{ required: true, message: '上映地区不能为空!' }]}
+                    aria-label="showing area"
                 >
                     <Checkbox.Group 
                         options={allAreas}
@@ -89,16 +91,18 @@ class MovieForm extends React.Component<IFormProp> {
 
                 <Form.Item
                     label="时长 (分钟)"
+                    aria-label="duration"
                     name="timeLong"
                     rules={[{required: true, message: "时长不能为空"}, 
                     {pattern: /^([1-9]\d{0,2})$/, message: "时长必须在1~999之间"}]}
                 >
-                    <Input type="number" min={1} max={999}/>
+                    <Input type="number" min={1} max={999} aria-placeholder="duration"/>
 
                 </Form.Item>
 
                 <Form.Item 
                     label="正在热映"
+                    aria-label="is hot"
                     name="isHot"
                     initialValue={false}
                     valuePropName="checked"
@@ -108,6 +112,7 @@ class MovieForm extends React.Component<IFormProp> {
 
                 <Form.Item 
                     label="即将上映"
+                    aria-label="coming soon"
                     name="isComing"
                     initialValue={false}
                     valuePropName="checked"
@@ -117,6 +122,7 @@ class MovieForm extends React.Component<IFormProp> {
 
                 <Form.Item 
                     label="经典影片"
+                    aria-label="is classic"
                     name="isClassic"
                     initialValue={false}
                     valuePropName="checked"
@@ -126,23 +132,25 @@ class MovieForm extends React.Component<IFormProp> {
 
                 <Form.Item 
                     label="电影描述"
+                    aria-label="description"
                     name="description"
                 >
-                    <Input.TextArea />
+                    <Input.TextArea aria-placeholder="movie description"/>
                 </Form.Item>
 
                 <Form.Item
                     label="海报"
+                    aria-label="poster"
                     name="poster"
                 >
                     <ImgUploader />
                 </Form.Item>
 
                 <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" aria-label="submit">
                         提交
                     </Button>
-                    <Button htmlType="button" 
+                    <Button htmlType="button" aria-label="return"
                         onClick={() => {
                             this.props.navigate && this.props.navigate(-1)
                         }}

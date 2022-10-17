@@ -152,7 +152,7 @@ class MovieTable extends React.Component<IMovieTableEvent & IMovieState & INavig
                 render: (id: string, record) => {
                     return (
                         <div>
-                            <Button type="primary" size="small" onClick={() => {
+                            <Button aria-label="edit" type="primary" size="small" onClick={() => {
                                 this.props.navigate(`/movie/edit/${id}`)
                             }}>编辑</Button>
                             <Popconfirm
@@ -165,7 +165,7 @@ class MovieTable extends React.Component<IMovieTableEvent & IMovieState & INavig
                                 okText="确定"
                                 cancelText="取消"
                             >
-                                <Button danger size="small" style={{
+                                <Button aria-label="delete" danger size="small" style={{
                                     marginLeft: 5
                                 }}>删除</Button>
                             </Popconfirm>

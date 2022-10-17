@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/313.c92e9b80.chunk.css","mappings":"AAAA,aAEI,UAAW,CADX,SAEJ","sources":["components/MovieTable.css"],"sourcesContent":[".tablePoster {\r\n    width: 3em;\r\n    height: 3em;\r\n}"],"names":[],"sourceRoot":""}

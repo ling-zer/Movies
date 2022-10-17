@@ -7,9 +7,10 @@ import Express from "express"
 import MovieRouter from "./routes/MovieRoute"
 import UploadRouter from "./routes/UploadRoute"
 import history from "connect-history-api-fallback"
+import compression from "compression"
 
 const app = Express();
-
+app.use(compression());
 app.use(history());
 
 app.use("/", Express.static("public/build")); // 访问/ , 把他映射到public/build
